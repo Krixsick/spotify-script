@@ -26,6 +26,7 @@ class Spotify():
 4. Add to Playlist
 5. User Music Library
 6. More Info
+7. Quit
                  """
     
     def __init__(self):
@@ -40,7 +41,9 @@ class Spotify():
             "2": self.search,
             "3": self.create_playlist,
             "4": self.add_to_playlist,
-            "5": self.user_music_lib
+            "5": self.user_music_lib,
+            "6": self.more_info,
+            "7": self.quit_program
         }
         
         self.playlist_to_id =  {
@@ -146,25 +149,11 @@ Image: {artist['images'][0]['url']}
                 print("-----Tracks-----")
                 for track in self.result['tracks']['items']:
                     print(track['name'])
-                try:
-                    print("""
-                          1. Artist
-                          2. Playlist
-                          3. Track
-                          """)
-                    choice_input = int(input("Which choice"))
+ 
                     """ 
-                    I want to use another function here to add songs to a playlist or favourite songs/artists/playlists
+                    future function to add songs from here possibly 
                     """
-                except Exception as e:
-                    print(e)
-                
-                if choice_input == 1:
-                    try:
-                        artist_input = input("")
-                    except Exception as e:
-                        print(e)
-                    
+
     
     def _get_id_of_user(self):
         #We get the current user and id of your spotify
@@ -202,8 +191,10 @@ Image: {artist['images'][0]['url']}
         try: 
             #Searches song
             song_input = input("Name of song: ")
+            print("---Your PlayLists---")
             for playlist in self.playlist_to_id:
                 print(playlist)
+            print("------")
             playlist_type = input("What is the name of your playlist you want to use (Be exact): ")
             result = self.sp.search(q=song_input, type="track", limit=1)
             #Gets track id
@@ -227,6 +218,9 @@ Image: {artist['images'][0]['url']}
 
     def more_info(self):
         print("Please follow this link for help ")
+        
+    def quit_program(self):
+        self.exit = True
 
 
 
